@@ -1,0 +1,133 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+*.venv
+env/
+*.env
+ENV/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# PyCharm project settings
+.idea/
+*.iml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Pytest cache and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# dotenv
+.env
+.env.test
+
+# pytest
+.cache
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# dbt
+.dbt/
+
+# virtualenv
+.venv/
+venv.bak/
+
+# VS Code
+.vscode/
+
+# Data files
+*.csv
+*.xls
+*.xlsx
+*.json
+
+# Exclude the virtualenv directory
+papernest/
+
+# Exclude data files/directories
+Data/2018_01_Sites_mobiles_2G_3G_4G_France_metropolitaine_L93.csv
