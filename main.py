@@ -45,6 +45,7 @@ async def get_coverage(address: str):
     coverage_data = find_nearest_coverage(coordinates)
     return coverage_data
 
+
 # httpx to call the adresse.data.gouv.fr API
 # Converting the address to coordinates  
 async def convert_address_to_coordinates(address: str):
@@ -52,23 +53,28 @@ async def convert_address_to_coordinates(address: str):
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(api_url)
-            response.raise_for_status()  # Will raise an exception for HTTP error codes
-            data = response.json()            
-            # Check if features are present in the response
-            if not data['features']:
-                logger.error("No features in the response for address: %s", address)
-                return None            
+            response.raise_for_status()
+            data = response.json()
+
+            # Assuming the first feature has the highest score
+            top_feature = data['features'][0]
+
+            # Check if the top feature's score is above a certain threshold
+            if top_feature['properties']['score'] < 0.7:
+                logger.error(f"Low confidence address: {address}")
+                return None
+
             # Extract coordinates
-            coordinates = data['features'][0]['geometry']['coordinates']
+            coordinates = top_feature['geometry']['coordinates']
             return {'longitude': coordinates[0], 'latitude': coordinates[1]}
         except httpx.HTTPStatusError as http_err:
-            # Specific httpx exception for HTTP errors
-            logger.error("HTTP error occurred: %s", http_err)
+            logger.error(f"HTTP error occurred: {http_err}")
             raise HTTPException(status_code=424, detail=str(http_err))
         except Exception as err:
-            # Generic exception, will catch any other error that occurs
-            logger.error("An error occurred: %s", err)
+            logger.error(f"An error occurred: {err}")
             raise HTTPException(status_code=500, detail=str(err))
+
+
 
 # Function to find the nearest network coverage by operators
 # from dataset based on the given coordinates
@@ -91,7 +97,3 @@ def find_nearest_coverage(coordinates, max_distance_km=1.0):
             '4G': bool(operator_data['4G'].max())
         }
     return coverage_by_operator
-
-
-
-
